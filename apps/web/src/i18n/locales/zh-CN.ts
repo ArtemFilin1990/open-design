@@ -194,6 +194,8 @@ export const zhCN: Dict = {
   'examples.tagMobilePrototype': '移动端原型',
   'examples.tagDesktopPrototype': '桌面端原型',
   'examples.previewLabel': '预览',
+  'examples.downloadAll': '⤓ 全部下载为 .zip',
+  'examples.downloadingAll': '下载中…',
 
   'ds.searchPlaceholder': '搜索设计体系…',
   'ds.emptyNoMatch': '没有匹配的设计体系。',

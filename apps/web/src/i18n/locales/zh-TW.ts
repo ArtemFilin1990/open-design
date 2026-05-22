@@ -194,6 +194,8 @@ export const zhTW: Dict = {
   'examples.tagMobilePrototype': '行動版原型',
   'examples.tagDesktopPrototype': '桌面版原型',
   'examples.previewLabel': '預覽',
+  'examples.downloadAll': '⤓ 全部下載為 .zip',
+  'examples.downloadingAll': '下載中…',
 
   'ds.searchPlaceholder': '搜尋設計系統…',
   'ds.emptyNoMatch': '沒有符合的設計系統。',

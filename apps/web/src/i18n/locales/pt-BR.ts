@@ -197,6 +197,8 @@ export const ptBR: Dict = {
   'examples.tagMobilePrototype': 'Protótipo mobile',
   'examples.tagDesktopPrototype': 'Protótipo desktop',
   'examples.previewLabel': 'Prévia',
+  'examples.downloadAll': '⤓ Baixar todos como .zip',
+  'examples.downloadingAll': 'Baixando…',
 
   'ds.searchPlaceholder': 'Buscar sistemas de design…',
   'ds.emptyNoMatch': 'Nenhum sistema de design corresponde à sua busca.',
