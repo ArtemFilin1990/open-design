@@ -209,6 +209,8 @@ export interface Dict {
   'examples.tagMobilePrototype': string;
   'examples.tagDesktopPrototype': string;
   'examples.previewLabel': string;
+  'examples.downloadAll': string;
+  'examples.downloadingAll': string;
 
   // Design systems tab
   'ds.searchPlaceholder': string;

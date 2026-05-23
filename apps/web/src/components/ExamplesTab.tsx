@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useT } from '../i18n';
 import type { Dict } from '../i18n/types';
 import { fetchSkillExample } from '../providers/registry';
-import { exportAsHtml, exportAsPdf, exportAsZip } from '../runtime/exports';
+import { exportAllSkillsAsZip, exportAsHtml, exportAsPdf, exportAsZip } from '../runtime/exports';
 import { buildSrcdoc } from '../runtime/srcdoc';
 import type { SkillSummary } from '../types';
 import { PreviewModal } from './PreviewModal';
@@ -81,6 +81,7 @@ export function ExamplesTab({ skills, onUsePrompt }: Props) {
   const [modeFilter, setModeFilter] = useState<ModeFilter>('all');
   const [scenarioFilter, setScenarioFilter] = useState<ScenarioFilter>('all');
   const [previewSkillId, setPreviewSkillId] = useState<string | null>(null);
+  const [downloadingAll, setDownloadingAll] = useState(false);
 
   const loadPreview = useCallback(
     async (id: string) => {
@@ -90,6 +91,26 @@ export function ExamplesTab({ skills, onUsePrompt }: Props) {
     },
     [previews],
   );
+
+  const handleDownloadAll = useCallback(async () => {
+    if (downloadingAll) return;
+    setDownloadingAll(true);
+    try {
+      const results = await Promise.all(
+        skills.map(async (skill) => {
+          const html = await fetchSkillExample(skill.id);
+          return html
+            ? { id: skill.id, name: skill.name, description: skill.description, html }
+            : null;
+        }),
+      );
+      exportAllSkillsAsZip(
+        results.filter((r): r is NonNullable<typeof r> => r !== null),
+      );
+    } finally {
+      setDownloadingAll(false);
+    }
+  }, [skills, downloadingAll]);
 
   // Open the modal for a card. We always trigger a preview fetch even if
   // the card hasn't been hovered yet — the modal needs the HTML.
@@ -168,6 +189,16 @@ export function ExamplesTab({ skills, onUsePrompt }: Props) {
   return (
     <div className="tab-panel examples-panel">
       <div className="examples-toolbar">
+        <div className="examples-toolbar-top">
+          <button
+            className="ghost examples-download-all"
+            disabled={downloadingAll}
+            onClick={() => { void handleDownloadAll(); }}
+            title={t('examples.downloadAll')}
+          >
+            {downloadingAll ? t('examples.downloadingAll') : t('examples.downloadAll')}
+          </button>
+        </div>
         <div
           className="examples-filter-row"
           role="tablist"

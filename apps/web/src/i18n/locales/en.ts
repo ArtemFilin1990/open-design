@@ -197,6 +197,8 @@ export const en: Dict = {
   'examples.tagMobilePrototype': 'Mobile prototype',
   'examples.tagDesktopPrototype': 'Desktop prototype',
   'examples.previewLabel': 'Preview',
+  'examples.downloadAll': '⤓ Download all as .zip',
+  'examples.downloadingAll': 'Downloading…',
 
   'ds.searchPlaceholder': 'Search design systems…',
   'ds.emptyNoMatch': 'No design systems match your search.',
